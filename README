@@ -1,0 +1,5 @@
+Go-Daemon is a go library that daemonizes the currently running process. Unfortunately, since go use threads there are some restrictions on how it can be used. 
+
+In a normal daemon in C, the process forks, setsid in child and exit in parent. This can theoretically be done at any point in the program. In this library, however, it must fork, exec and setsid in child and exit in parent. This means that any state that was in the parent process is lost in the new daemon. This isn't a big deal if you just want to deamonize on startup, however if you want to daemonize a currently running process it becomes trickier.
+
+Deamonize is only supported on unix systems at the moment. Adding support for windows shouldn't be too difficult.
